@@ -1,0 +1,30 @@
+.list {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 6px;
+
+  table {
+    width: 100%;
+
+    th,
+    td {
+      text-align: left;
+    }
+
+    thead {
+      tr {
+        th {
+          padding-bottom: 20px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+}

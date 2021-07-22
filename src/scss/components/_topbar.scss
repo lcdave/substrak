@@ -1,0 +1,30 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 60px;
+
+  .logo {
+    flex: 0 0 10%;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 5px;
+  }
+
+  .navigation {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline;
+        margin-right: 30px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
