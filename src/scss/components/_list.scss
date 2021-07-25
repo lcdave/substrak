@@ -1,20 +1,27 @@
 .list {
   background-color: #ffffff;
-  padding: 40px 50px;
+  padding: 60px;
   border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
   table {
     width: 100%;
+    border-collapse: collapse;
 
     th,
     td {
       text-align: left;
+      border-bottom: 1px solid #f2f2f2;
     }
 
     thead {
       tr {
         th {
-          padding-bottom: 20px;
+          background: #f2f2f2;
+          vertical-align: middle;
+          padding: 30px 15px;
+          text-transform: uppercase;
+          font-size: 15px;
         }
       }
     }
@@ -22,9 +29,55 @@
     tbody {
       tr {
         td {
-          padding-bottom: 10px;
+          padding: 30px 15px;
+
+          &.expires-soon {
+            color: #e63946;
+          }
+
+          &.expires-late {
+            color: #52b788;
+          }
+
+          &.icons {
+            text-align: center;
+
+            svg {
+              padding-right: 20px;
+              cursor: pointer;
+
+              &.fa-trash-alt {
+                color: #e63946;
+              }
+
+              &.fa-pen {
+                color: #1d3557;
+              }
+
+              &:last-child {
+                padding-right: 0;
+              }
+            }
+          }
         }
       }
+    }
+  }
+
+  .tag {
+    color: #333333;
+    background: #a8dadc;
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+
+    &.var_monthly {
+      background: #a8dadc;
+    }
+
+    &.var_yearly {
+      background: #1d3557;
+      color: $c-white;
     }
   }
 }

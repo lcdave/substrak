@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  margin-bottom: 60px;
+  color: $c-white;
 
   .logo {
     flex: 0 0 10%;
@@ -20,6 +20,7 @@
       li {
         display: inline;
         margin-right: 30px;
+        font-size: 17px;
 
         &:last-child {
           margin-right: 0;
