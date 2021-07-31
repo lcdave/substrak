@@ -88,13 +88,49 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://egpmvzwzpyionhzwhmry.supabase.co'
+const supabaseAnonKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzcxNjE0OSwiZXhwIjoxOTQzMjkyMTQ5fQ.7VqMdt7iaAj8TbT_wf-wkyb5PqIoxtR7wmkUMPmUyaE'
+
+const supabase = createClient([supabaseUrl], [supabaseAnonKey])
+
+import { onMounted, ref } from 'vue'
 
 export default {
-  data () {
+  data() {
     return {
       penIcon: faPen,
-      trashIcon: faTrashAlt,
+      trashIcon: faTrashAlt
     }
+  },
+  setup() {
+    console.log('setup call')
+    const loading = ref(true)
+    const title = ref('')
+
+    async function getSubscriptions() {
+      try {
+        loading.value = true
+
+        let { data, error, status } = await supabase.from('subscription').select(`name, description`).eq('id', 1).single()
+
+        if (error && status !== 406) throw error
+
+        if (data) {
+          title.value = data.name
+        }
+      } catch (error) {
+        alert(error.message)
+      } finally {
+        loading.value = false
+      }
+      console.log(title.value)
+    }
+    onMounted(() => {
+      getSubscriptions()
+    })
   },
   components: {
     FontAwesomeIcon
