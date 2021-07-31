@@ -90,27 +90,28 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { createClient } from '@supabase/supabase-js'
 
+import { ref } from 'vue'
+
 const supabaseUrl = 'https://egpmvzwzpyionhzwhmry.supabase.co'
 const supabaseAnonKey =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzcxNjE0OSwiZXhwIjoxOTQzMjkyMTQ5fQ.7VqMdt7iaAj8TbT_wf-wkyb5PqIoxtR7wmkUMPmUyaE'
 
 const supabase = createClient([supabaseUrl], [supabaseAnonKey])
 
-import { onMounted, ref } from 'vue'
-
 export default {
   data() {
     return {
       penIcon: faPen,
-      trashIcon: faTrashAlt
+      trashIcon: faTrashAlt,
+      title: null
     }
   },
-  setup() {
-    console.log('setup call')
-    const loading = ref(true)
-    const title = ref('')
-
-    async function getSubscriptions() {
+  mounted() {
+    this.getSubscriptions()
+  },
+  methods: {
+    getSubscriptions: async function () {
+      const loading = ref(true)
       try {
         loading.value = true
 
@@ -119,18 +120,16 @@ export default {
         if (error && status !== 406) throw error
 
         if (data) {
-          title.value = data.name
+          this.title = data.name
         }
       } catch (error) {
         alert(error.message)
       } finally {
         loading.value = false
       }
-      console.log(title.value)
+
+      console.log('fechted title: ' + this.title)
     }
-    onMounted(() => {
-      getSubscriptions()
-    })
   },
   components: {
     FontAwesomeIcon
